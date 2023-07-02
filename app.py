@@ -4,7 +4,7 @@ import json
 import re
 import os
 import webbrowser
-
+import urllib.parse
 
 st.set_page_config(page_title='Welcome to Back Up',
                    page_icon='',
@@ -57,6 +57,7 @@ def Signup(nom, prenom, email, password):
         with open(FileNameUniqId, "w") as UserId :
             json.dump(UserAccount, UserId)
         st.success(f"{FileName} created successfully")
+        return uniqId  # Return the uniqId value
     except FileNotFoundError:
         st.error(f"Error: {FileName} not found")
 
@@ -92,10 +93,10 @@ with login:
                 account = json.load(user)
             if password == '': pass
             elif password == account['Password'] and password != '':
-                 url = f'https://backup-free.streamlit.app/?uniqID={account["uniqID"]}'
-                 st.markdown(f"[Go to backup page]({url})")
-            
-            
+                uniqId = account["uniqID"]
+                encoded_uniqId = urllib.parse.quote(uniqId)  # Encode the uniqId value
+                url = f'https://backup-free.streamlit.app/?uniqID={encoded_uniqId}'
+                st.markdown(f"[Go to backup page]({url})")
             else:
                 st.error("Password Invalid")
             
