@@ -81,7 +81,8 @@ with login:
         EmailValid = email
     password = st.text_input('Enter your Password:')
     
-    if st.button('Login'):
+    login_button = st.button('Login')
+    if login_button:
         filename = f"{email}.json"
         try:
             with open(filename, "r") as user:
@@ -89,13 +90,12 @@ with login:
             if password == account['Password']:
                 url = f'https://free-storage.streamlit.app/?uniqID={account["uniqID"]}'  # Change the URL here
                 st.markdown(f"[Login]({url})")
-                if login_button and 'account' in locals() and 'url' in locals():
-                  
-                  st.empty()
-            else:
-                st.error("Invalid password")
         except FileNotFoundError:
             st.error("Go to signup")
+
+    # Hide the tabs after clicking the Login button
+    if login_button and 'account' in locals() and 'url' in locals():
+        st.empty()
 
 with signup:
     st.title('Sign Up')
@@ -113,5 +113,6 @@ with signup:
     
     correct = Passw(Password, confirm)
     if correct:
-        if st.button("Signup"):
+        signup_button = st.button("Signup")
+        if signup_button:
             Signup(Name, LastName, Email, correct)
