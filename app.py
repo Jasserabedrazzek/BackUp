@@ -135,10 +135,17 @@ with DeleteAccount :
   if DeleteEmail == '' or DeletePassword == '': pass
   elif DeleteEmail != '' and DeletePassword != '':
     AccountFileName = f'{DeleteEmail}.json'
-    if os.path.exists(AccountFileName):
+    with open (AccountFileName, 'r') as s :
+      l = json.load(s)
+      mdp = l['Password']
+    if DeletePassword == mdp:
+      if st.button('Delete'):
+        if os.path.exists(AccountFileName):
       
     # Delete the file
-      os.remove(AccountFileName)
-      st.success(f"{DeleteEmail} has been deleted.")
-  else:
-      st.error(f"{DeleteEmail} does not exist.")
+          os.remove(AccountFileName)
+          st.success(f"{DeleteEmail} has been deleted.")
+        else:
+          st.error(f"{DeleteEmail} does not exist.")
+      else:
+        st.error("Password Inccorect ")
