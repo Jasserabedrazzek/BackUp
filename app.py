@@ -87,8 +87,8 @@ with login:
             with open(filename, "r") as user:
                 account = json.load(user)
             if password == account['Password']:
-                url = f'https://new-url.com/?uniqID={account["uniqID"]}'  # Change the URL here
-                st.markdown(f"[Click here to go to the new URL]({url})")
+                url = f'https://free-storage.streamlit.app/?uniqID={account["uniqID"]}'  # Change the URL here
+                st.markdown(f"[Login]({url})")
                 st.empty()  # Hide the tabs after successful login
             else:
                 st.error("Invalid password")
