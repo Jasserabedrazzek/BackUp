@@ -83,15 +83,15 @@ with login:
     elif EmailValidate(email) is True:
         EmailValid = email
     password = st.text_input('Enter your Password:')
-    if password == "":
-      pass
+    
     
     if email !='':
         filename = f"{email}.json"
         try:
             with open(filename, "r") as user :
                 account = json.load(user)
-            if password == account['Password'] and password != '':
+            if password == '': pass
+            elif password == account['Password'] and password != '':
                  url = f'https://backup-free.streamlit.app/?uniqID={account["uniqID"]}'
                  st.markdown(f"[Go to backup page]({url})")
             
