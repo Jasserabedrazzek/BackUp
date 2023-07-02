@@ -88,7 +88,7 @@ with login:
                 account = json.load(user)
             if password == account['Password']:
                 url = f'https://backup-free.streamlit.app/?uniqID={account["uniqID"]}'
-                webbrowser.open_new_tab(url)
+                st.markdown(f"[Login]({url})")
             
             
             else:
@@ -135,17 +135,20 @@ with DeleteAccount :
   if DeleteEmail == '' or DeletePassword == '': pass
   elif DeleteEmail != '' and DeletePassword != '':
     AccountFileName = f'{DeleteEmail}.json'
-    with open (AccountFileName, 'r') as s :
-      l = json.load(s)
-      mdp = l['Password']
-    if DeletePassword == mdp:
-      if st.button('Delete'):
-        if os.path.exists(AccountFileName):
+    try:
+      with open (AccountFileName, 'r') as s :
+        l = json.load(s)
+        mdp = l['Password']
+      if DeletePassword == mdp:
+        if st.button('Delete'):
+          if os.path.exists(AccountFileName):
       
     # Delete the file
-          os.remove(AccountFileName)
-          st.success(f"{DeleteEmail} has been deleted.")
+            os.remove(AccountFileName)
+            st.success(f"{DeleteEmail} has been deleted.")
+          else:
+            st.error(f"{DeleteEmail} does not exist.")
         else:
-          st.error(f"{DeleteEmail} does not exist.")
-      else:
-        st.error("Password Inccorect ")
+          st.error("Password Inccorect ")
+    except FileNotFoundError :
+      st.error(f"{DeleteEmail} does not exist .")
