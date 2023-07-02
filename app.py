@@ -89,8 +89,8 @@ with login:
             with open(filename, "r") as user :
                 account = json.load(user)
             if password == account['Password']:
-                url = f'https://backup-free.streamlit.app/?uniqID={account["uniqID"]}'
-                st.markdown(f"[Go to backup](url)")
+                url = f'https://backup-free.streamlit.app/'
+                st.experimental_set_query_params(uniqID=account["uniqID"])
             
             
             else:
