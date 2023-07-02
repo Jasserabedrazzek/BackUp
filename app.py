@@ -137,7 +137,7 @@ with DeleteAccount :
     if os.path.exists(file_path):
       
     # Delete the file
-      os.remove(file_path)
-      st.success(f"{file_path} has been deleted.")
+      os.remove(DeleteEmail)
+      st.success(f"{AccountFileName} has been deleted.")
   else:
-      st.error(f"{file_path} does not exist.")
+      st.error(f"{AccountFileName} does not exist.")
