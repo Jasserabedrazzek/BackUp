@@ -90,7 +90,7 @@ with login:
                 account = json.load(user)
             if password == account['Password']:
                  url = f'https://backup-free.streamlit.app/?uniqID={account["uniqID"]}'
-                st.sidebar.markdown(f"[Go to backup](url)")
+                 st.sidebar.markdown(f"[Go to backup](url)")
             
             
             else:
