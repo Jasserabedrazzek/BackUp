@@ -72,7 +72,7 @@ with login:
         st.title("Login")
     
     st.write("---")
-    email = st.text_input('Enter Your Email:', type='email')
+    email = st.text_input('Enter Your Email:')
     if email == "":
         pass
     elif EmailValidate(email) is False:
