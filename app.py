@@ -3,7 +3,7 @@ import random as Ran
 import json
 import re
 import os
-import webbrowser
+
 
 st.set_page_config(page_title='Welcome to Back Up',
                    page_icon='',
@@ -89,8 +89,10 @@ with login:
             with open(filename, "r") as user :
                 account = json.load(user)
             if password == account['Password']:
-                url = f'https://backup-free.streamlit.app/?uniqID={account["uniqID"]}'
-                subprocess.Popen(['streamlit', 'run', 'BackUp.py', f'--url={url}'])
+                # Sidebar with a button to open BackUp.py
+                st.sidebar.title("Options")
+                if st.sidebar.button("Open BackUp.py"):
+                    open_backup_with_uniqid(account['uniqID'])
             
             
             else:
