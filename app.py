@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit import session_state as state
 import random as Ran
 import json
 import re
@@ -64,70 +65,74 @@ def email_exists(email):
     FileName = f"{email}.json"
     return os.path.exists(FileName)
 
+if "login_state" not in state:
+    state.login_state = False
+
 login, signup = st.tabs(["Login", "Sign Up"])
 
-with login:
-    Co1, Co2 = st.columns([5, 7])
-    with Co2:
-        st.title("Login")
-    
-    st.write("---")
-    email = st.text_input('Enter Your Email:')
-    if email == "":
-        pass
-    elif EmailValidate(email) is False:
-        st.error('Invalid email format')
-    elif EmailValidate(email) is False and email == '':
-        pass
-    elif EmailValidate(email) is True:
-        EmailValid = email
-    password = st.text_input('Enter your Password:')
-    
-    if password != '':
-        filename = f"{email}.json"
-        try:
-            with open(filename, "r") as user :
-                account = json.load(user)
-            if password == account['Password']:
-                url = f'https://backup-free.streamlit.app/?uniqID={account["uniqID"]}'
-                st.markdown(f"[Login]({url})")
-            
-            
-            else:
-                st.error("Password Invalid")
-            
-        except FileNotFoundError :
-            st.error("Go to signup")
-            
+if state.login_state:
+    with signup:
+        Cs1, Cs2 = st.columns([4, 6])
+        with Cs2:
+            st.title('Sign Up')
+        col1, col2 = st.columns(2)
+        with col1:
+            Name = st.text_input("Enter your name:")
+        with col2:
+            LastName = st.text_input("Enter your last name:")
+        Email = st.text_input('Enter your Email:')
+        col3, col4 = st.columns(2)
+        
+        with col3:
+            Password = st.text_input('Enter Password:')
+            if Password == '':
+                pass
+            elif len(Password) < 8:
+                short = "Password is too short (minimum 8 characters)"
+                st.error(short)
+        with col4:
+            confirm = st.text_input('Confirm Password:')
+            if confirm == '':
+                pass
+            elif Password != confirm:
+                incorrect = "Passwords do not match"
+                st.error(incorrect)
+        
+        correct = Passw(Password, confirm)
+        if correct:
+            if st.button("Signup"):
+                Signup(Name, LastName, Email, correct)
+else:
+    with login:
+        Co1, Co2 = st.columns([5, 7])
+        with Co2:
+            st.title("Login")
+        
+        st.write("---")
+        email = st.text_input('Enter Your Email:')
+        if email == "":
+            pass
+        elif EmailValidate(email) is False:
+            st.error('Invalid email format')
+        elif EmailValidate(email) is False and email == '':
+            pass
+        elif EmailValidate(email) is True:
+            EmailValid = email
+        password = st.text_input('Enter your Password:')
+        
+        if password != '':
+            filename = f"{email}.json"
+            try:
+                with open(filename, "r") as user:
+                    account = json.load(user)
+                if password == account['Password']:
+                    state.login_state = True
+                    st.experimental_set_query_params(uniqID=account['uniqID'])
+                else:
+                    st.error("Password Invalid")
+            except FileNotFoundError:
+                st.error("Go to signup")
 
-with signup:
-    Cs1, Cs2 = st.columns([4, 6])
-    with Cs2:
-        st.title('Sign Up')
-    col1, col2 = st.columns(2)
-    with col1:
-        Name = st.text_input("Enter your name:")
-    with col2:
-        LastName = st.text_input("Enter your last name:")
-    Email = st.text_input('Enter your Email:')
-    col3, col4 = st.columns(2)
-    
-    with col3:
-        Password = st.text_input('Enter Password:')
-        if Password == '':
-            pass
-        elif len(Password) < 8:
-            short = "Password is too short (minimum 8 characters)"
-            st.error(short)
-    with col4:
-        confirm = st.text_input('Confirm Password:')
-        if confirm == '':
-            pass
-        elif Password != confirm:
-            incorrect = "Passwords do not match"
-            st.error(incorrect)
-    
-    correct = Passw(Password, confirm)
-    if correct:
-        if st.button("Signup"):
-            Signup(Name, LastName, Email, correct)
+if state.login_state:
+    # Redirect to a new URL
+    st.experimental_rerun()
