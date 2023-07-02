@@ -3,14 +3,12 @@ import random as Ran
 import json
 import re
 import os
-import subprocess
+import webbrowser
 
-st.set_page_config(
-    page_title='Welcome to Back Up',
-    page_icon='',
-    layout='centered',
-    initial_sidebar_state='auto'
-)
+st.set_page_config(page_title='Welcome to Back Up',
+                   page_icon='',
+                   layout='centered',
+                   initial_sidebar_state='auto')
 
 def EmailValidate(email):
     pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
@@ -55,7 +53,7 @@ def Signup(nom, prenom, email, password):
     try:
         with open(FileName, "w") as Save:
             json.dump(UserAccount, Save)
-        with open(FileNameUniqId, "w") as UserId:
+        with open(FileNameUniqId, "w") as UserId :
             json.dump(UserAccount, UserId)
         st.success(f"{FileName} created successfully")
     except FileNotFoundError:
@@ -66,21 +64,15 @@ def email_exists(email):
     FileName = f"{email}.json"
     return os.path.exists(FileName)
 
-def open_backup_with_uniqid(uniqid):
-    # Open BackUp.py using subprocess
-    script_path = "BackUp.py"
-    url = f"your-url-with-uniqid/{uniqid}"  # Replace with the appropriate URL
-    subprocess.Popen(["python", script_path, url])
-
 login, signup = st.tabs(["Login", "Sign Up"])
 
 with login:
     Co1, Co2 = st.columns([5, 7])
     with Co2:
         st.title("Login")
-
+    
     st.write("---")
-    email = st.text_input('Enter Your Email:')
+    email = st.text_input('Enter Your Email:', type='email')
     if email == "":
         pass
     elif EmailValidate(email) is False:
@@ -89,22 +81,24 @@ with login:
         pass
     elif EmailValidate(email) is True:
         EmailValid = email
-    password = st.text_input('Enter your Password:')
-
+    password = st.text_input('Enter your Password:',type="password")
+    
     if st.button('Login'):
         filename = f"{email}.json"
         try:
-            with open(filename, "r") as user:
+            with open(filename, "r") as user :
                 account = json.load(user)
             if password == account['Password']:
-                # Sidebar with a button to open BackUp.py
-                st.sidebar.title("Options")
-                if st.sidebar.button("Open BackUp.py"):
-                    open_backup_with_uniqid(account['uniqID'])
+                url = f'https://backup-free.streamlit.app/?uniqID={account["uniqID"]}'
+                webbrowser.open_new_tab(url)
+            
+            
             else:
                 st.error("Password Invalid")
-        except FileNotFoundError:
+            
+        except FileNotFoundError :
             st.error("Go to signup")
+            
 
 with signup:
     Cs1, Cs2 = st.columns([4, 6])
@@ -117,7 +111,7 @@ with signup:
         LastName = st.text_input("Enter your last name:")
     Email = st.text_input('Enter your Email:')
     col3, col4 = st.columns(2)
-
+    
     with col3:
         Password = st.text_input('Enter Password:')
         if Password == '':
@@ -132,7 +126,7 @@ with signup:
         elif Password != confirm:
             incorrect = "Passwords do not match"
             st.error(incorrect)
-
+    
     correct = Passw(Password, confirm)
     if correct:
         if st.button("Signup"):
