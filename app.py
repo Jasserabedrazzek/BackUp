@@ -132,10 +132,10 @@ with signup:
 with DeleteAccount :
   DeleteEmail = st.text_input("Email :")
   DeletePassword =  st.text_input('your Password:',type="password")
-  if DeleteEmail == '' and DeletePassword == '': pass
+  if DeleteEmail == '' or DeletePassword == '': pass
   elif DeleteEmail != '' and DeletePassword != '':
     AccountFileName = f'{DeleteEmail}.json'
-    if os.path.exists(file_path):
+    if os.path.exists(AccountFileName):
       
     # Delete the file
       os.remove(DeleteEmail)
