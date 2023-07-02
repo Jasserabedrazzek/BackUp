@@ -83,6 +83,8 @@ with login:
     elif EmailValidate(email) is True:
         EmailValid = email
     password = st.text_input('Enter your Password:')
+    if password == "":
+      pass
     
     if email !='':
         filename = f"{email}.json"
