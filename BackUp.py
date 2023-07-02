@@ -1,6 +1,10 @@
 import streamlit as st
 import json
 
+st.set_page_config(page_title=f'Welcome',
+                   page_icon='',
+                   layout='centered',
+                   initial_sidebar_state='auto')
 
 query_params = st.experimental_get_query_params()
 
@@ -20,7 +24,4 @@ else:
     except FileNotFoundError :
         st.markdown(f"uniqID not provided , [Go to login page](https://free-storage.streamlit.app/) .")
 
-    st.set_page_config(page_title=f'Welcome',
-                   page_icon='',
-                   layout='centered',
-                   initial_sidebar_state='auto')
+
