@@ -4,9 +4,8 @@ query_params = st.experimental_get_query_params()
 # Get the value of the 'uniqID' parameter
 uniq_id = query_params.get('uniqID', [''])[0]
 if not uniq_id:
-    # Redirect to the specified URL using JavaScript
-    redirect_url = 'https://free-storage.streamlit.app/'
-    st.markdown(f'<script>window.location.href="{redirect_url}";</script>', unsafe_allow_html=True)
+    # Provide a default value or handle the missing parameter here
+    st.markdown(f"uniqID not provided,[GO TO HOME](https://free-storage.streamlit.app/)")
 else:
     # Display the value of 'uniqID'
     st.write("uniqID:", uniq_id)
