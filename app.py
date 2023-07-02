@@ -130,7 +130,7 @@ with signup:
         if st.button("Signup"):
             Signup(Name, LastName, Email, correct)
 with DeleteAccount :
-  DeleteEmail = st.text_input("Enter Your Email")
+  DeleteEmail = st.text_input("Your Email")
   DeletePassword =  st.text_input('Enter your Password:',type="password")
   AccountFileName = f'{DeleteEmail}.json'
   if DeleteEmail != '' and DeletePassword != '':
