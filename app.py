@@ -89,7 +89,9 @@ with login:
             if password == account['Password']:
                 url = f'https://free-storage.streamlit.app/?uniqID={account["uniqID"]}'  # Change the URL here
                 st.markdown(f"[Login]({url})")
-                st.empty()  # Hide the tabs after successful login
+                if login_button and 'account' in locals() and 'url' in locals():
+                  
+                  st.empty()
             else:
                 st.error("Invalid password")
         except FileNotFoundError:
