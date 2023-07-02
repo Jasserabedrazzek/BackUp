@@ -1,27 +1,20 @@
 import streamlit as st
 import json
 
-st.set_page_config(page_title=f'Welcome',
-                   page_icon='',
-                   layout='centered',
-                   initial_sidebar_state='auto')
+# Get the uniqID from the URL parameters
+uniqID = st.experimental_get_query_params().get("uniqID", [None])[0]
 
-query_params = st.experimental_get_query_params()
-
-# Get the value of the 'uniqID' parameter
-uniq_id = query_params.get('uniqID', [''])[0]
-if not uniq_id:
-    # Provide a default value or handle the missing parameter here
-    st.markdown(f"uniqID not provided , [Go to login page](https://free-storage.streamlit.app/) .")
-else:
-    # Display the value of 'uniqID'
-    Id = uniq_id
-    FileName = f'{Id}.json'
+# Load and display the user account data
+if uniqID:
+    filename = f"{uniqID}.json"
     try:
-        with open(FileName,'r') as file:
-            user = json.load(file)
-            st.write(user)
-    except FileNotFoundError :
-        st.markdown(f"uniqID not provided , [Go to login page](https://free-storage.streamlit.app/) .")
-
-
+        with open(filename, "r") as user:
+            account = json.load(user)
+        st.write("User Account:")
+        st.write(f"Name: {account['nom']}")
+        st.write(f"Last Name: {account['prenom']}")
+        st.write(f"Email: {account['Email']}")
+    except FileNotFoundError:
+        st.error("User account not found")
+else:
+    st.error("Invalid URL")
