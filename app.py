@@ -49,12 +49,10 @@ def Signup(nom, prenom, email, password):
     }
     
     FileName = f"{email}.json"
-    FileNameUniqId = f"{str(uniqId)}.json"
     try:
         with open(FileName, "w") as Save:
             json.dump(UserAccount, Save)
-        with open(FileNameUniqId, "w") as UserId :
-            json.dump(UserAccount, UserId)
+        
         st.success(f"{FileName} created successfully")
     except FileNotFoundError:
         st.error(f"Error: {FileName} not found")
@@ -64,7 +62,7 @@ def email_exists(email):
     FileName = f"{email}.json"
     return os.path.exists(FileName)
 
-login, signup = st.tabs(["Login", "Sign Up"])
+login, signup, DeleteAccount = st.tabs(["Login", "Sign Up", "Delete Account ."])
 
 with login:
     Co1, Co2 = st.columns([5, 7])
@@ -131,3 +129,14 @@ with signup:
     if correct:
         if st.button("Signup"):
             Signup(Name, LastName, Email, correct)
+with DeleteAccount :
+  DeleteEmail = st.text_input("Enter Your Email")
+  DeletePassword =  st.text_input('Enter your Password:',type="password")
+  AccountFileName = f'{DeleteEmail}.json'
+  if DeleteEmail != '' and DeletePassword != '':
+    if os.path.exists(file_path):
+    # Delete the file
+    os.remove(file_path)
+    st.success(f"{file_path} has been deleted.")
+  else:
+    st.error(f"{file_path} does not exist.")
