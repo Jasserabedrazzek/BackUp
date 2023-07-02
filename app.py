@@ -83,7 +83,7 @@ with login:
         EmailValid = email
     password = st.text_input('Enter your Password:')
     
-    if password and email != '':
+    if password != '':
         filename = f"{email}.json"
         try:
             with open(filename, "r") as user :
