@@ -4,7 +4,6 @@ import json
 import re
 import os
 import webbrowser
-import urllib.parse
 
 st.set_page_config(page_title='Welcome to Back Up',
                    page_icon='',
@@ -54,10 +53,9 @@ def Signup(nom, prenom, email, password):
     try:
         with open(FileName, "w") as Save:
             json.dump(UserAccount, Save)
-        with open(FileNameUniqId, "w") as UserId :
+        with open(FileNameUniqId, "w") as UserId:
             json.dump(UserAccount, UserId)
         st.success(f"{FileName} created successfully")
-        return uniqId  # Return the uniqId value
     except FileNotFoundError:
         st.error(f"Error: {FileName} not found")
 
@@ -66,13 +64,11 @@ def email_exists(email):
     FileName = f"{email}.json"
     return os.path.exists(FileName)
 
+# Initialize login and signup tabs
 login, signup = st.tabs(["Login", "Sign Up"])
 
 with login:
-    Co1, Co2 = st.columns([5, 7])
-    with Co2:
-        st.title("Login")
-    
+    st.title("Login")
     st.write("---")
     email = st.text_input('Enter Your Email:')
     if email == "":
@@ -85,51 +81,33 @@ with login:
         EmailValid = email
     password = st.text_input('Enter your Password:')
     
-    
-    if email !='':
+    if st.button('Login'):
         filename = f"{email}.json"
         try:
-            with open(filename, "r") as user :
+            with open(filename, "r") as user:
                 account = json.load(user)
-            if password == '': pass
-            elif password == account['Password'] and password != '':
-                uniqId = account["uniqID"]
-                encoded_uniqId = urllib.parse.quote(uniqId)  # Encode the uniqId value
-                url = f'https://backup-free.streamlit.app/?uniqID={encoded_uniqId}'
-                st.markdown(f"[Go to backup page]({url})")
+            if password == account['Password']:
+                url = f'https://backup-free.streamlit.app/?uniqID={account["uniqID"]}'
+                webbrowser.open_new_tab(url)
+                st.empty()  # Hide the tabs after successful login
             else:
-                st.error("Password Invalid")
-            
-        except FileNotFoundError :
+                st.error("Invalid password")
+        except FileNotFoundError:
             st.error("Go to signup")
-            
 
 with signup:
-    Cs1, Cs2 = st.columns([4, 6])
-    with Cs2:
-        st.title('Sign Up')
-    col1, col2 = st.columns(2)
-    with col1:
-        Name = st.text_input("Enter your name:")
-    with col2:
-        LastName = st.text_input("Enter your last name:")
+    st.title('Sign Up')
+    Name = st.text_input("Enter your name:")
+    LastName = st.text_input("Enter your last name:")
     Email = st.text_input('Enter your Email:')
-    col3, col4 = st.columns(2)
-    
-    with col3:
-        Password = st.text_input('Enter Password:')
-        if Password == '':
-            pass
-        elif len(Password) < 8:
-            short = "Password is too short (minimum 8 characters)"
-            st.error(short)
-    with col4:
-        confirm = st.text_input('Confirm Password:')
-        if confirm == '':
-            pass
-        elif Password != confirm:
-            incorrect = "Passwords do not match"
-            st.error(incorrect)
+    Password = st.text_input('Enter Password:')
+    if Password != '':
+        if len(Password) < 8:
+            st.error("Password is too short (minimum 8 characters)")
+    confirm = st.text_input('Confirm Password:')
+    if confirm != '':
+        if Password != confirm:
+            st.error("Passwords do not match")
     
     correct = Passw(Password, confirm)
     if correct:
