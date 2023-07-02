@@ -4,7 +4,7 @@ import json
 import re
 import os
 import webbrowser
-from streamlit.ScriptRunner import StopException, RerunException
+
 
 st.set_page_config(page_title='Welcome to Back Up',
                    page_icon='',
@@ -91,8 +91,7 @@ with login:
                 account = json.load(user)
             if password == account['Password']:
                  url = f'https://backup-free.streamlit.app/?uniqID={account["uniqID"]}'
-                 st.script_runner.on_click("window.open", url)  # Open URL in new tab
-                 raise RerunException(st.script_runner.StopException)
+                 webbrowser.open_new_tab(url)
             
             
             else:
