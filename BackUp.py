@@ -37,6 +37,8 @@ if email and uniqID:
     'Select options',
     languages, default=languages[0]
 )
+    ShowName = st.checkbox('Show name .')
+    ShowId = st.checkbox('Show ID .')
 
 
 
