@@ -52,7 +52,7 @@ def display_uploaded_files(user_id):
                     st.write("PDF file is uploaded.")
                     # Add code to display the PDF file using st.write or st.markdown
                     
-                elif file_extension in [".mp3", ".wav"]:
+                elif file_extension in [".mp3", ".wav",".m4a"]:
                     st.audio(file_path, format=file_extension)
                 
                 elif file_extension in [".mp4", ".mov"]:
