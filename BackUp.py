@@ -1,11 +1,10 @@
 import streamlit as st
 
-def get_uniqID_and_email():
-    uniqID = st.session_state["uniqID"]
-    email = st.session_state["email"]
-    return uniqID, email
+# Get the URL parameters
+url = st.experimental_get_query_params()
+uniqID = url.get('uniqID', [''])[0]
+email = url.get('email', [''])[0]
 
-uniqID, email = get_uniqID_and_email()
-
-st.write("The uniqID is:", uniqID)
-st.write("The email is:", email)
+# Display the values
+st.write('uniqID:', uniqID)
+st.write('email:', email)
