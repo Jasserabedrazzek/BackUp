@@ -12,6 +12,10 @@ if email and uniqID:
   st.sidebar.text(f"Name : {Name}")
   st.sidebar.text(f"Email : {email}")
   st.sidebar.text(f"Id : {Id}")
+  selected_options = st.sidebar.multiselect(
+    'Select options',
+    ['python', 'js']
+)
 
 
 
