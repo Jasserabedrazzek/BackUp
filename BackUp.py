@@ -43,7 +43,7 @@ if email and uniqID:
         default=languages[0]
     )
     
-st.write("&#129680;")
+st.write("""&#129093;&#8252;&#129095""")
 
 # Or using markdown syntax
 st.markdown("&#129680;")
