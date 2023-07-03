@@ -30,18 +30,19 @@ def delete_file(file_id):
         save_database(df)
 
 # Function to display the uploaded files with options to delete and share
-def display_uploaded_files():
+def display_uploaded_files(user_id):
     df = load_database()
     if not df.empty:
         st.subheader("Uploaded Files:")
         for index, row in df.iterrows():
             file_id = row['ID']
-            file_path = row['File']
-            st.write(f"**ID:** {file_id}")
-            st.write(f"**File Name:** {os.path.basename(file_path)}")
-            if st.button(f"Delete {file_id}"):
-                delete_file(file_id)
-                st.success("File deleted successfully.")
+            if file_id == user_id:
+                file_path = row['File']
+                st.write(f"**ID:** {file_id}")
+                st.write(f"**File Name:** {os.path.basename(file_path)}")
+                if st.button(f"Delete {file_id}"):
+                    delete_file(file_id)
+                    st.success("File deleted successfully.")
         st.subheader("Share File:")
         # Add code to implement the functionality for sharing the file here.
 
@@ -68,8 +69,8 @@ if uniqID and len(str(uniqID)) == 12:
         save_database(df)
         st.success("File uploaded successfully.")
 
-    # Display the uploaded files with options to delete and share
-    display_uploaded_files()
+    # Display the uploaded files for the current user with options to delete and share
+    display_uploaded_files(ID)
 
 else:
     st.markdown("[Return Home Page](https://free-storage.streamlit.app/)")
