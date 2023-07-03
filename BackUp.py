@@ -40,5 +40,5 @@ if email and uniqID:
         default=languages[0]
     )
     
-    ShowName = st.checkbox('Show name.')
-    ShowId = st.checkbox('Show ID.')
+    ShowName = st.sidebar.checkbox('Show name.')
+    ShowId = st.sidebar.checkbox('Show ID.')
