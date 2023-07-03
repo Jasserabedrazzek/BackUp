@@ -28,17 +28,17 @@ languages = [
 ]
 
 if email and uniqID:
-  Id = uniqID
-  st.sidebar.title("user")
-  st.sidebar.text(f"Name : {Name}")
-  st.sidebar.text(f"Email : {email}")
-  st.sidebar.text(f"Id : {Id}")
-  selected_options = st.sidebar.multiselect(
-    'Select options',
-    languages, default=languages[0]
- )
- ShowName = st.checkbox('Show name.')
- ShowId = st.checkbox('Show ID.')
+      Id = uniqID
+      st.sidebar.title("user")
+      st.sidebar.text(f"Name : {Name}")
+      st.sidebar.text(f"Email : {email}")
+      st.sidebar.text(f"Id : {Id}")
+      selected_options = st.sidebar.multiselect(
+        'Select options',
+        languages, default=languages[0]
+     )
+     ShowName = st.checkbox('Show name.')
+     ShowId = st.checkbox('Show ID.')
 
 
 
