@@ -88,7 +88,6 @@ with login:
                 account = json.load(user)
             ChangeLastName = account['prenom']
             LastName = ChangeLastName.replace(" ", "+")
-            st.write(LastName)
             if password == account['Password']:
                 url = f'https://backup-free.streamlit.app/?uniqID={account["uniqID"]}&email={account["Email"]}&name={account["nom"]}&Lname={LastName}'
                 st.markdown(f"[Login]({url})")
