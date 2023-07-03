@@ -9,7 +9,7 @@ Name = url.get('name',[''])[0]
 if email and uniqID:
   Id = uniqID
   st.sidebar.title("user")
-  st.sidebar.text(f"Name : {name}")
+  st.sidebar.text(f"Name : {Name}")
   st.sidebar.text(f"Email : {email}")
   st.sidebar.text(f"Id : {Id}")
 
