@@ -35,7 +35,7 @@ if email and uniqID:
   st.sidebar.text(f"Id : {Id}")
   selected_options = st.sidebar.multiselect(
     'Select options',
-    languages
+    languages, default=languages[0]
 )
 
 
