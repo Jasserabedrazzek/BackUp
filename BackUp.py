@@ -40,33 +40,22 @@ def display_uploaded_files(user_id):
                 file_path = row['File']
                 st.write(f"**ID:** {file_id}")
                 st.write(f"**File Name:** {os.path.basename(file_path)}")
-                
-                file_extension = os.path.splitext(file_path)[1].lower()
-                
-                if file_extension == ".jpg" or file_extension == ".jpeg" or file_extension == ".png" or file_extension == ".gif":
-                    st.image(file_path, caption=f"**ID:** {file_id}", use_column_width=True)
-                
-                elif file_extension == ".pdf":
-                    st.write(f"**ID:** {file_id}")
-                    st.write(f"**File Name:** {os.path.basename(file_path)}")
-                    st.write("PDF file is uploaded.")
-                    # Add code to display the PDF file using st.write or st.markdown
-                    
-                elif file_extension in [".mp3", ".wav",".m4a"]:
-                    st.audio(file_path, format=file_extension)
-                
-                elif file_extension in [".mp4", ".mov"]:
-                    st.video(file_path)
-                    
-                else:
-                    st.write(f"**ID:** {file_id}")
-                    st.write(f"**File Name:** {os.path.basename(file_path)}")
-                    st.write("File format not supported.")
-                    
                 if st.button(f"Delete {file_id}"):
                     delete_file(file_id)
                     st.success("File deleted successfully.")
-                    
+                file_extension = os.path.splitext(file_path)[1].lower()
+                if file_extension in ['.mp3', '.wav', '.m4a']:
+                    st.audio(file_path, format='audio/{ext}'.format(ext=file_extension[1:]))
+                elif file_extension in ['.mp4', '.avi', '.mov']:
+                    st.video(file_path)
+                elif file_extension in ['.jpg', '.jpeg', '.png', '.gif']:
+                    st.image(file_path, caption=os.path.basename(file_path), use_column_width=True)
+                elif file_extension == '.pdf':
+                    st.write("PDF files are not supported for inline display. You can download it here:")
+                    st.markdown(f"[Download {os.path.basename(file_path)}]({file_path})")
+                else:
+                    st.warning("File format not supported for inline display.")
+                    st.write(f"Click [here]({file_path}) to download the file.")
         st.subheader("Share File:")
         # Add code to implement the functionality for sharing the file here.
 
