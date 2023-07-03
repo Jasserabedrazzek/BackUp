@@ -44,7 +44,7 @@ def display_uploaded_files(user_id):
                     delete_file(file_id)
                     st.success("File deleted successfully.")
                 file_extension = os.path.splitext(file_path)[1].lower()
-                if file_extension in ['.mp3', '.wav', '.m4a']:
+                if file_extension in ['.mp3', '.wav', '.ogg']:
                     st.audio(file_path, format='audio/{ext}'.format(ext=file_extension[1:]))
                 elif file_extension in ['.mp4', '.avi', '.mov']:
                     st.video(file_path)
