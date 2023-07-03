@@ -6,7 +6,7 @@ import os
 import webbrowser
 
 st.set_page_config(page_title='Welcome to Back Up',
-                   page_icon='',
+                   page_icon='"&#129680;"',
                    layout='centered',
                    initial_sidebar_state='auto')
 
