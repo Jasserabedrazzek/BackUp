@@ -9,7 +9,7 @@ Lname = url.get('Lname',[''])[0]
 
 st.set_page_config(
     page_title="Chat with developers",
-    page_icon="",
+    page_icon="	:computer:",
     layout="centered",
     initial_sidebar_state="expanded"
 )
