@@ -6,7 +6,7 @@ uniqID = url.get('uniqID', [''])[0]
 email = url.get('email', [''])[0]
 
 if email and uniqID:
-  Id = unqID
+  Id = uniqID
   st.sidebar.title("user")
   st.sidebar.text(f"Email : {email}")
   st.sidebar.text(f"Id : {Id}")
