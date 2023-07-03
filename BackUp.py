@@ -63,8 +63,8 @@ if uniqID and len(str(uniqID)) == 12:
         with open(file_path, "wb") as f:
             f.write(UploadFile.getbuffer())
         df = load_database()
-        new_row = {'ID': ID, 'File': file_path}
-        df = df.append(new_row, ignore_index=True)
+        new_row = pd.DataFrame({'ID': [ID], 'File': [file_path]})
+        df = pd.concat([df, new_row], ignore_index=True)
         save_database(df)
         st.success("File uploaded successfully.")
 
