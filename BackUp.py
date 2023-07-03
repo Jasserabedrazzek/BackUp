@@ -43,3 +43,7 @@ if email and uniqID:
         default=languages[0]
     )
     
+st.write("&#129680;")
+
+# Or using markdown syntax
+st.markdown("&#129680;")
