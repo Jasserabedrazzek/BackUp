@@ -30,9 +30,9 @@ languages = [
 if email and uniqID:
     Id = uniqID
     st.sidebar.title("User")
-    st.sidebar.text(f"Name: {Name}")
-    st.sidebar.text(f"Email: {email}")
-    st.sidebar.text(f"Id: {Id}")
+    st.sidebar.text(f"Name : {Name}")
+    st.sidebar.text(f"Email : {email}")
+    st.sidebar.text(f"Id : {Id}")
     
     selected_options = st.sidebar.multiselect(
         'Select options',
