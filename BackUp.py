@@ -36,9 +36,9 @@ if email and uniqID:
   selected_options = st.sidebar.multiselect(
     'Select options',
     languages, default=languages[0]
-)
- ShowName = st.checkbox('Show name .')
- ShowId = st.checkbox('Show ID .')
+ )
+ ShowName = st.checkbox('Show name.')
+ ShowId = st.checkbox('Show ID.')
 
 
 
