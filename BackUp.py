@@ -55,8 +55,11 @@ if uniqID and len(str(uniqID)) == 12:
                        initial_sidebar_state='auto')
     UploadFile = st.file_uploader("Choose a file")
     if UploadFile:
+        # Create the "uploads" directory if it doesn't exist
+        if not os.path.exists("uploads"):
+            os.makedirs("uploads")
         # Save the uploaded file and add its entry to the database
-        file_path = f"uploads/{ID}_{UploadFile.name}"
+        file_path = os.path.join("uploads", f"{ID}_{UploadFile.name}")
         with open(file_path, "wb") as f:
             f.write(UploadFile.getbuffer())
         df = load_database()
