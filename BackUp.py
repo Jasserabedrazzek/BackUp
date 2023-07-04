@@ -50,7 +50,7 @@ def MakeFileJson(IDuser , Name , LastName , Email ):
         pass
 if uniqID:
     Id = uniqID
-    MakeFileJson(Id , Name , LName , email )
+    MakeFileJson(Id , Name , Lname, email )
     st.sidebar.title("User")
     st.sidebar.text(f"Name : {Name}")
     st.sidebar.text(f"Last name : {Lname}")
