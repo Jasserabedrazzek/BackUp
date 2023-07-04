@@ -74,7 +74,9 @@ if uniqID:
         default=languages[0]
          )
     if len(selected_optionsl) == 1:
-        st.write(selected_optionsl)
+        lang = selected_optionsl
+    else:
+        st.error("Please select exactly one language.")
     
 else:
     pass
