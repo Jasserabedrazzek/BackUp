@@ -45,7 +45,8 @@ def MakeFileJson(IDuser , Name , LastName , Email ):
                 json.dumps(UserInformations)
             with open (JsonFile, "r") as f :
                 data = json.load(JsonFile)
-            st.write(data)
+            if st.button('show '):
+                st.write(data)
     except :
         pass
 if uniqID:
