@@ -50,7 +50,7 @@ def MakeFileJson(IDuser , Name , LastName , Email ):
 if uniqID:
     Id = uniqID
     JsonFile = f"{str(Id)}.json"
-    MakeFileJson(Id , Name , Lname, email )
+    
     st.sidebar.title("User")
     st.sidebar.text(f"Name : {Name}")
     st.sidebar.text(f"Last name : {Lname}")
@@ -64,8 +64,7 @@ if uniqID:
         languages,
         default=languages[0]
     )
-    with open(JsonFile, "r") as f :
-        st.write(json.load(f))
+    
 else:
     pass
     
