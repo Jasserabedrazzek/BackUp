@@ -49,6 +49,7 @@ def MakeFileJson(IDuser , Name , LastName , Email ):
     
 if uniqID:
     Id = uniqID
+    JsonFile = f"{Id}.json"
     MakeFileJson(Id , Name , Lname, email )
     st.sidebar.title("User")
     st.sidebar.text(f"Name : {Name}")
