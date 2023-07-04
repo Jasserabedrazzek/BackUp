@@ -68,13 +68,13 @@ if uniqID:
     st.write('---')
     st.text_input(email,'')
     st.text_area("Whrite code (optional)",)
-    selected_options = st.multiselect(
+    selected_optionsl = st.multiselect(
         'Select Languages',
         languages,
-        index=0,
-        max_value=1
+        default=languages[0]
          )
-    
+    if len(selected_optionsl) == 1:
+        st.write(selected_optionsl)
     
 else:
     pass
