@@ -1,4 +1,6 @@
 import streamlit as st
+import json
+import os
 
 # Get the URL parameters
 url = st.experimental_get_query_params()
@@ -27,9 +29,28 @@ languages = [
     "Kotlin",
     "TypeScript"
 ]
-
-if email and uniqID:
+def MakeFileJson(IDuser , Name , LastName , Email ):
+    UserInformations = {
+        "Name" : Name ,
+        "Last Name" : LastName ,
+        "Email" : Email ,
+        "messages" : ""
+    }
+    JsonFile = f"{IDuser}.json"
+    try :
+        if os.path.exists(JsonFile):
+            pass
+        else:
+            with open(JsonFile , "w") as SaveUserFile :
+                json.dumps(UserInformations)
+            with open (JsonFile, "r") as f :
+                data = json.load(JsonFile)
+            st.write(data)
+    except :
+        pass
+if uniqID:
     Id = uniqID
+    MakeFileJson(Id , Name , LName , email )
     st.sidebar.title("User")
     st.sidebar.text(f"Name : {Name}")
     st.sidebar.text(f"Last name : {Lname}")
@@ -37,13 +58,13 @@ if email and uniqID:
     st.sidebar.text(f"Id : {Id}")
     
     
+    
     selected_options = st.sidebar.multiselect(
         'Select options',
         languages,
         default=languages[0]
     )
+else:
+    pass
     
-st.write("\U0001F511")
 
-# Or using markdown syntax
-st.markdown("&#129680;")
