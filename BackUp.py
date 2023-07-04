@@ -36,7 +36,7 @@ def MakeFileJson(IDuser , Name , LastName , Email ):
         "Email" : Email ,
         "messages" : ""
     }
-    JsonFile = f"{IDuser}.json"
+    JsonFile = f"{str(IDuser)}.json"
     try :
         if os.path.exists(JsonFile):
             pass
@@ -49,7 +49,7 @@ def MakeFileJson(IDuser , Name , LastName , Email ):
     
 if uniqID:
     Id = uniqID
-    JsonFile = f"{Id}.json"
+    JsonFile = f"{str(Id)}.json"
     MakeFileJson(Id , Name , Lname, email )
     st.sidebar.title("User")
     st.sidebar.text(f"Name : {Name}")
