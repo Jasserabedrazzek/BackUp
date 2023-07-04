@@ -71,7 +71,7 @@ if uniqID:
     selected_options = st.multiselect(
         'Select Languages',
         languages,
-        default=languages[0]
+        default=languages[0], len(languages) == 1
     )
     
     
