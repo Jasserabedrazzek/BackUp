@@ -72,7 +72,7 @@ if uniqID:
         'Select Languages',
         languages,
         default=languages[0],
-        len(languages) == 1
+        max_value=1
          )
     
     
