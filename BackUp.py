@@ -15,7 +15,8 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="expanded"
 )
-
+st.header("Chat")
+st.write("---")
 languages = [
     "Python",
     "Java",
@@ -64,6 +65,15 @@ if uniqID:
         languages,
         default=languages[0]
     )
+    st.write('---')
+    st.text_input(email,'')
+    st.text_area("Whrite code (optional)",)
+    selected_options = st.multiselect(
+        'Select Languages',
+        languages,
+        default=languages[0]
+    )
+    
     
 else:
     pass
