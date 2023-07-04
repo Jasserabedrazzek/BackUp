@@ -43,12 +43,10 @@ def MakeFileJson(IDuser , Name , LastName , Email ):
         else:
             with open(JsonFile , "w") as SaveUserFile :
                 json.dumps(UserInformations)
-            with open (JsonFile, "r") as f :
-                data = json.load(JsonFile)
-            if st.button('show '):
-                st.write(data)
+            
     except :
         pass
+    
 if uniqID:
     Id = uniqID
     MakeFileJson(Id , Name , Lname, email )
@@ -65,6 +63,8 @@ if uniqID:
         languages,
         default=languages[0]
     )
+    with open(JsonFile, "r") as f :
+        st.write(json.load(f))
 else:
     pass
     
