@@ -75,7 +75,7 @@ if uniqID:
          )
     if len(selected_optionsl) == 1:
         lang = selected_optionsl[0]
-        st.code(code, language=lang)
+        st.code(code, language=lang, line_numbers=True)
     else:
         st.error("Please select exactly one language.")
     
