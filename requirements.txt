@@ -1,1 +1,2 @@
-turtle==0.0.2
+streamlit==36.0.0
+numpy==1.26.4
